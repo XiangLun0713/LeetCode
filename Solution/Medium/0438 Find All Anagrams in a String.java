@@ -4,12 +4,12 @@ class Solution {
         if (p.length() > s.length()) {
             return result;
         }
-        final int windowSize = p.length();
-        int[] freqOfS = freq(s.substring(0, windowSize));
+        final int WINDOW_SIZE = p.length();
+        int[] freqOfS = freq(s.substring(0, WINDOW_SIZE));
         int[] freqOfP = freq(p);
 
         for (int i = 0; i < s.length(); i++) {
-            int j = i + windowSize;
+            int j = i + WINDOW_SIZE;
             if (equalArray(freqOfP, freqOfS)) {
                 result.add(i);
             }
