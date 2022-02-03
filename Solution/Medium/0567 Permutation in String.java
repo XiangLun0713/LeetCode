@@ -1,10 +1,14 @@
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
         final int WINDOW_SIZE = s1.length();
-        if (WINDOW_SIZE == 0) return false;
+        if (WINDOW_SIZE == 0 || s2.length() < WINDOW_SIZE) return false;
         int[] freqOfS1 = freq(s1);
-        for (int i = 0; i <= s2.length() - WINDOW_SIZE; i++) {
-            if (equalArray(freqOfS1, freq(s2.substring(i, i + WINDOW_SIZE))))
+        int[] freqOfS2 = freq(s2.substring(0, WINDOW_SIZE));
+        if (equalArray(freqOfS1, freqOfS2)) return true;
+        for (int i = 0; i < s2.length() - WINDOW_SIZE; i++) {
+            freqOfS2[s2.charAt(i) - 'a']--;
+            freqOfS2[s2.charAt(i + WINDOW_SIZE) - 'a']++;
+            if (equalArray(freqOfS1, freqOfS2))
                 return true;
         }
         return false;
