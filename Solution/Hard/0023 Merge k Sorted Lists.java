@@ -15,14 +15,13 @@ class Solution {
     }
 
     private ListNode divideAndConquer(ListNode[] lists) {
+        if(lists.length == 1) return lists[0];
+        
         ListNode node1, node2;
-        if (lists.length > 1) {
-            int mid = (lists.length - 1) / 2;
-            node1 = divideAndConquer(Arrays.copyOfRange(lists, 0, mid + 1));
-            node2 = divideAndConquer(Arrays.copyOfRange(lists, mid + 1, lists.length));
-            return sortNode(node1, node2);
-        }
-        return sortNode(lists[0], null);
+        int mid = (lists.length - 1) / 2;
+        node1 = divideAndConquer(Arrays.copyOfRange(lists, 0, mid + 1));
+        node2 = divideAndConquer(Arrays.copyOfRange(lists, mid + 1, lists.length));
+        return sortNode(node1, node2); 
     }
 
     private ListNode sortNode(ListNode node1, ListNode node2) {
