@@ -10,24 +10,31 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        if(list1 == null) return list2;
-        if(list2 == null) return list1;
-        if(list1 == null && list2 == null) return null;
-        ArrayList<Integer> list = new ArrayList<>();
-        while(list1 != null){
-            list.add(list1.val);
-            list1 = list1.next;
-        }
-        while(list2 != null){
-            list.add(list2.val);
-            list2 = list2.next;
-        }
-        Collections.sort(list);
         ListNode result = new ListNode(-1);
-        ListNode node = result;
-        while(!list.isEmpty()){
-            node.next = new ListNode(list.remove(0));
-            node = node.next;
+        ListNode curr = result;
+        while (list1 != null || list2 != null) {
+            if (list1 != null && list2 != null) {
+                if (list1.val > list2.val) {
+                    curr.next = new ListNode(list2.val);
+                    list2 = list2.next;
+                } else if (list1.val < list2.val) {
+                    curr.next = new ListNode(list1.val);
+                    list1 = list1.next;
+                } else {
+                    curr.next = new ListNode(list1.val);
+                    curr = curr.next;
+                    curr.next = new ListNode(list2.val);
+                    list1 = list1.next;
+                    list2 = list2.next;
+                }
+            } else if (list1 == null && list2 != null) {
+                curr.next = new ListNode(list2.val);
+                list2 = list2.next;
+            } else if (list1 != null && list2 == null) {
+                curr.next = new ListNode(list1.val);
+                list1 = list1.next;
+            }
+            curr = curr.next;
         }
         return result.next;
     }
