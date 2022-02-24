@@ -48,14 +48,11 @@ class Solution {
     }
 
     private ListNode getMid(ListNode node) {
-        int count = 0;
-        ListNode pointer = node;
-        List<ListNode> list = new ArrayList<>();
-        while (pointer != null) {
-            list.add(pointer);
-            pointer = pointer.next;
-            count++;
+        ListNode slow = node, fast = node;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
         }
-        return list.get((count / 2) - 1);
+        return slow;
     }
 }
