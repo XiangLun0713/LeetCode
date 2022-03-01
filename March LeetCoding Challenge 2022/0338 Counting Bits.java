@@ -1,18 +1,31 @@
 class Solution {
     public int[] countBits(int n) {
-        int[] result = new int[n + 1];
-        for (int i = 1; i < result.length; i++) {
-            int currVal= i;
-            int count = 0;
-            while (currVal > 0) {
-                if ((currVal & 1) == 1) {
-                    count++;
-                }
-                currVal >>= 1;
+        switch (n) {
+            case 0 -> {
+                return new int[]{0};
             }
-            result[i] = count;
-        }
-        return result;
-    }
+            case 1 -> {
+                return new int[]{0, 1};
+            }
+            case 2 -> {
+                return new int[]{0, 1, 1};
+            }
+            case 3 -> {
+                return new int[]{0, 1, 1, 2};
+            }
+            default -> {
+                int[] memoize = new int[n + 1];
+                System.arraycopy(new int[]{0, 1, 1, 2}, 0, memoize, 0, 4);
+                for (int i = 4; i < memoize.length; i++) {
+                    if (i % 2 == 0) {
+                        memoize[i] = memoize[i / 2];
+                    } else {
+                        memoize[i] = memoize[(i - 1) / 2] + 1;
+                    }
+                }
 
+                return memoize;
+            }
+        }
+    }
 }
