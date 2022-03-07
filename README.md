@@ -1,8 +1,9 @@
 # LeetCode
-My solutions for LeetCode problems.
+A collection of my LeetCode solutions. My daily LeetCode journey begins on 26 Jan 2022
 
-## About me
-Hi! I am currently a first-year student studying at the University of Malaya. I love problem-solving! But since I'm just starting to dip my toe in programming, some of my solutions isn't the best and are restricted to Java only. But I will keep on improving my LeetCode solutions in this repository, don't you worry ( •̀ ω •́ )✧
+## Navigation
+### Daily Leetcode Challange
+- [March 2022](https://github.com/XiangLun0713/LeetCode/tree/master/March%20LeetCoding%20Challenge%202022)
 
-## Important Dates
-- My LeetCode journey begins on 26 Jan 2022
+### Others
+- [Current Best Solutions](https://github.com/XiangLun0713/LeetCode/tree/master/Solution)
