@@ -10,32 +10,32 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1 == null && list2 == null) return null;
+        if(list1 == null ^ list2 == null) return (list1 == null)? list2 : list1;
+        
         ListNode result = new ListNode(-1);
-        ListNode curr = result;
-        while (list1 != null || list2 != null) {
-            if (list1 != null && list2 != null) {
-                if (list1.val > list2.val) {
-                    curr.next = new ListNode(list2.val);
-                    list2 = list2.next;
-                } else if (list1.val < list2.val) {
-                    curr.next = new ListNode(list1.val);
-                    list1 = list1.next;
-                } else {
-                    curr.next = new ListNode(list1.val);
-                    curr = curr.next;
-                    curr.next = new ListNode(list2.val);
-                    list1 = list1.next;
-                    list2 = list2.next;
-                }
-            } else if (list1 == null && list2 != null) {
-                curr.next = new ListNode(list2.val);
-                list2 = list2.next;
-            } else if (list1 != null && list2 == null) {
-                curr.next = new ListNode(list1.val);
-                list1 = list1.next;
+        ListNode resultPointer = result;
+        ListNode pointer1 = list1;
+        ListNode pointer2 = list2;
+        
+        while (pointer1 != null && pointer2 != null) {
+            if (pointer1.val > pointer2.val){
+                resultPointer.next = new ListNode(pointer2.val);
+                resultPointer = resultPointer.next;
+                pointer2 = pointer2.next;
+            } else if (pointer2.val <= pointer2.val) {
+                resultPointer.next = new ListNode(pointer1.val);
+                resultPointer = resultPointer.next;
+                pointer1 = pointer1.next;
             }
-            curr = curr.next;
         }
+        
+        if (pointer1 != null){
+           resultPointer.next = pointer1;  
+        } else if (pointer2 != null) {
+            resultPointer.next = pointer2;
+        }
+            
         return result.next;
     }
 }
