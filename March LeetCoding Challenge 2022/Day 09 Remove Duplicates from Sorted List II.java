@@ -10,32 +10,21 @@
  */
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        if (head == null) return null;
-        HashMap<Integer, ListNode> hashMap = new HashMap<>();
-        ListNode pointer = head;
+        ListNode sentinel = new ListNode(-1, head);
+        ListNode prevNode = sentinel;
 
-        int skipVal = -1000;
-        while (pointer != null) {
-            if (pointer.val != skipVal) {
-                if (hashMap.containsKey(pointer.val)) {
-                    hashMap.remove(pointer.val);
-                    skipVal = pointer.val;
-                } else {
-                    hashMap.put(pointer.val, pointer);
+        while (head != null) {
+            if (head.next != null && head.next.val == head.val) {
+                while (head.next != null && head.next.val == head.val) {
+                    head = head.next;
                 }
+                prevNode.next = null;
+            } else {
+                prevNode.next = head;
+                prevNode = head;
             }
-            pointer = pointer.next;
+            head = head.next;
         }
-
-        TreeSet<Integer> set = new TreeSet<>(hashMap.keySet());
-        ListNode result = new ListNode(-1);
-        pointer = result;
-        for (int i : set) {
-            pointer.next = hashMap.get(i);
-            pointer = pointer.next;
-        }
-        pointer.next = null;
-
-        return result.next;
+        return sentinel.next;
     }
 }
