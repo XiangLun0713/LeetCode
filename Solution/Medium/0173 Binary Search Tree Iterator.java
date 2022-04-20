@@ -14,29 +14,27 @@
  * }
  */
 class BSTIterator {
-    private List<Integer> list;
-    private int index;
+    private Deque<TreeNode> deque = new ArrayDeque<>();
     
     public BSTIterator(TreeNode root) {
-        list = new ArrayList<>();
-        index = 0;
-        traverse(root);
+        traverseLeft(root);
     }
     
     public int next() {
-        return list.get(index++);
+        TreeNode curr = deque.pop();
+        if (curr.right != null) traverseLeft(curr.right);
+        return curr.val;
     }
     
     public boolean hasNext() {
-        if (index < list.size()) return true;
-        return false;
+        return !deque.isEmpty();
     }
     
-    private void traverse(TreeNode root) {
-        if (root == null) return;
-        traverse(root.left);
-        list.add(root.val);
-        traverse(root.right);
+    private void traverseLeft(TreeNode root) {
+        while (root != null) {
+            deque.push(root);
+            root = root.left;
+        }
     }
 }
 
