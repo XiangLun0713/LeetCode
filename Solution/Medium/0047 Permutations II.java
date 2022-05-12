@@ -1,36 +1,39 @@
+// Using Depth-First-Search with recurssion and backtracking
+// Using HashMap to prevent duplication when there are duplicated number in the nums array
+// HashMap {Key => elements in nums array; Value => frequency of that element in nums array};
+
 class Solution {
+    private List<List<Integer>> result = new ArrayList<>();
+
     public List<List<Integer>> permuteUnique(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
         HashMap<Integer, Integer> hashMap = new HashMap<>();
-        for (int res : nums) {
-            if (hashMap.containsKey(res)) {
-                hashMap.put(res, hashMap.get(res) + 1);
+        for (int num : nums) {
+            if (!hashMap.containsKey(num)) {
+                hashMap.put(num, 1);
             } else {
-                hashMap.put(res, 1);
+                hashMap.put(num, hashMap.get(num) + 1);
             }
         }
-        for (int res : hashMap.keySet()) {
-            HashMap<Integer, Integer> map = new HashMap<>(hashMap);
-            map.put(res, map.get(res) - 1);
-            List<Integer> path = new ArrayList<>();
-            path.add(res);
-            dfs(nums, result, path, map);
-        }
+        dfs(hashMap, new ArrayList<>());
         return result;
     }
 
-    private void dfs(int[] nums, List<List<Integer>> result, List<Integer> path, HashMap<Integer, Integer> map) {
-        if (nums.length == path.size()) {
-            result.add(path);
+    private void dfs(HashMap<Integer, Integer> freqMap, List<Integer> prePath) {
+        if (freqMap.isEmpty()) {
+            result.add(prePath);
         } else {
-            for (int key : map.keySet()) {
-                if (map.get(key) > 0) {
-                    HashMap<Integer, Integer> hashMap = new HashMap<>(map);
-                    hashMap.put(key, hashMap.get(key) - 1);
-                    List<Integer> temp = new ArrayList<>(path);
-                    temp.add(key);
-                    dfs(nums, result, temp, hashMap);
+            for (int key : freqMap.keySet()) {
+                List<Integer> path = new ArrayList<>(prePath);
+                HashMap<Integer, Integer> hashMap = new HashMap<>(freqMap);
+
+                int value = hashMap.get(key);
+                if (value == 1) {
+                    hashMap.remove(key);
+                } else {
+                    hashMap.put(key, value - 1);
                 }
+                path.add(key);
+                dfs(hashMap, path);
             }
         }
     }
