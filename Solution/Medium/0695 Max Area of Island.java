@@ -1,42 +1,27 @@
 class Solution {
+    private int[][] directions = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
     public int maxAreaOfIsland(int[][] grid) {
         int max = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == 1) {
-                    max = Math.max(max, dfs(grid, i, j));
+                    max = Math.max(max, countIslandArea(grid, i, j));
                 }
             }
         }
         return max;
     }
-
-    private int dfs(int[][] grid, int row, int column) {
+    
+    private int countIslandArea(int[][] grid, int row, int col){
         int count = 1;
-        grid[row][column] = 0;
-        try {
-            if (grid[row - 1][column] == 1) {
-                count += dfs(grid, row - 1, column);
+        grid[row][col] = 0;
+        for (var dir : directions) {
+            int newRow = row + dir[0];
+            int newCol = col + dir[1];
+            
+            if (newRow >= 0 && newRow < grid.length && newCol >= 0 && newCol < grid[0].length && grid[newRow][newCol] == 1) {
+                count += countIslandArea(grid, newRow, newCol);
             }
-        } catch (ArrayIndexOutOfBoundsException ignored) {
-        }
-        try {
-            if (grid[row + 1][column] == 1) {
-                count += dfs(grid, row + 1, column);
-            }
-        } catch (ArrayIndexOutOfBoundsException ignored) {
-        }
-        try {
-            if (grid[row][column - 1] == 1) {
-                count += dfs(grid, row, column - 1);
-            }
-        } catch (ArrayIndexOutOfBoundsException ignored) {
-        }
-        try {
-            if (grid[row][column + 1] == 1) {
-                count += dfs(grid, row, column + 1);
-            }
-        } catch (ArrayIndexOutOfBoundsException ignored) {
         }
         return count;
     }
