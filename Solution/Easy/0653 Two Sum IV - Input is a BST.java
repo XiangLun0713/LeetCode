@@ -23,7 +23,6 @@ class Solution {
         if (root == null) return false;
         if (set.contains(k - root.val)) return true;
         set.add(root.val);
-        if (traverse(set, root.left, k) || traverse(set, root.right, k)) return true;
-        return false;
+        return traverse(set, root.left, k) || traverse(set, root.right, k);
     }
 }
