@@ -6,6 +6,7 @@ class Solution {
         }
         for (char c : t.toCharArray()) {
             cache[c - 'a']--;
+            if (cache[c - 'a'] < 0) return false;
         }
         for (int i : cache) {
             if (i != 0) return false;
