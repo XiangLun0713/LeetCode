@@ -18,6 +18,6 @@ class Solution {
             result++;
         }
         
-        return result';
+        return result;
     }
 }
