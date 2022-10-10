@@ -3,10 +3,9 @@ class Solution {
         int n = palindrome.length();
         if (n < 2) return "";
         char[] arr = palindrome.toCharArray();
-        int right = n - 1;
         boolean replaceChar = false;
         for (int left = 0; left < n / 2; left++) {
-            if (arr[left] == arr[right] && arr[left] == 'a') continue;
+            if (arr[left] == 'a') continue;
             arr[left] = 'a';
             replaceChar = true;
             break;
