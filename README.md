@@ -10,6 +10,7 @@ A collection of my LeetCode solutions. My daily LeetCode journey begins on 26 Ja
 - [July 2022](https://github.com/XiangLun0713/LeetCode/tree/master/July%20LeetCoding%20Challenge%202022)
 - [August 2022](https://github.com/XiangLun0713/LeetCode/tree/master/August%20LeetCoding%20Challenge%202022)
 - [September 2022](https://github.com/XiangLun0713/LeetCode/tree/master/September%20LeetCoding%20Challenge%202022)
+- [October 2022](https://github.com/XiangLun0713/LeetCode/tree/master/October%20LeetCoding%20Challenge%202022)
 
 ### Others
 - [Current Best Solutions](https://github.com/XiangLun0713/LeetCode/tree/master/Solution)
